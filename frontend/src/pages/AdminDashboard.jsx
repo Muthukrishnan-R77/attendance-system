@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { BarChart, Bar, PieChart, Pie, Cell, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import StatCard from '../components/StatCard';
 import { dashboardService } from '../services/dashboardService';
 import { attendanceService } from '../services/attendanceService';
-import { Users, UserCheck, UserX, Clock } from 'lucide-react';
+import { leaveService } from '../services/leaveService';
+import { Users, UserCheck, UserX, Clock, FileText } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -14,6 +16,7 @@ const AdminDashboard = () => {
     checkedIn: 0
   });
   const [recentAttendance, setRecentAttendance] = useState([]);
+  const [leaveSummary, setLeaveSummary] = useState({ total: 0, pending: 0, approved: 0, rejected: 0 });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,6 +34,8 @@ const AdminDashboard = () => {
         if (attendanceData.success) {
           setRecentAttendance(attendanceData.attendance.slice(0, 5));
         }
+
+        setLeaveSummary(leaveService.getSummary());
       } catch (err) {
         console.error('Failed to load admin dashboard data:', err);
       } finally {
@@ -44,6 +49,20 @@ const AdminDashboard = () => {
     if (!timeStr) return '-- : --';
     return new Date(timeStr).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
+
+  const chartData = [
+    { name: 'Present', value: Number(stats.presentToday || 0) },
+    { name: 'Absent', value: Number(stats.absentToday || 0) },
+    { name: 'Leaves', value: Number(leaveSummary.pending + leaveSummary.approved) },
+    { name: 'Pending', value: Number(leaveSummary.pending || 0) }
+  ];
+
+  const pieData = [
+    { name: 'Present', value: Number(stats.presentToday || 0), color: '#10B981' },
+    { name: 'Absent', value: Number(stats.absentToday || 0), color: '#F43F5E' },
+    { name: 'Leave Requests', value: Number(leaveSummary.total || 0), color: '#F59E0B' },
+    { name: 'Employees', value: Number(stats.totalEmployees || 0), color: '#6366F1' }
+  ];
 
   return (
     <div className="app-layout">
@@ -78,6 +97,53 @@ const AdminDashboard = () => {
               icon={Clock}
               colorClass="amber"
             />
+            <StatCard
+              title="Leave Requests"
+              value={loading ? '...' : leaveSummary.total}
+              icon={FileText}
+              colorClass="amber"
+            />
+          </div>
+
+          <div className="analytics-grid">
+            <div className="table-card chart-card">
+              <div className="table-header-bar">
+                <div>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: '700', color: 'var(--text-main)' }}>Attendance Summary</h3>
+                </div>
+              </div>
+              <div className="chart-box">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.15)" />
+                    <XAxis dataKey="name" stroke="#94A3B8" />
+                    <YAxis stroke="#94A3B8" />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="#6366F1" radius={[8, 8, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            <div className="table-card chart-card">
+              <div className="table-header-bar">
+                <div>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: '700', color: 'var(--text-main)' }}>Breakdown</h3>
+                </div>
+              </div>
+              <div className="chart-box">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie data={pieData} dataKey="value" nameKey="name" innerRadius={42} outerRadius={70} paddingAngle={2}>
+                      {pieData.map((entry) => (
+                        <Cell key={entry.name} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </div>
 
           {/* Recent Today Activity Table */}

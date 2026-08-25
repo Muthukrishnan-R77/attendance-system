@@ -11,6 +11,8 @@ import EmployeeManagement from './pages/EmployeeManagement';
 import AddEmployee from './pages/AddEmployee';
 import EditEmployee from './pages/EditEmployee';
 import AttendanceHistory from './pages/AttendanceHistory';
+import EmployeeLeavePage from './pages/EmployeeLeavePage';
+import AdminLeaveApprovals from './pages/AdminLeaveApprovals';
 
 const RootRedirect = () => {
   const { user, loading } = useAuth();
@@ -37,12 +39,14 @@ function App() {
             <Route path="/admin/employees/add" element={<AddEmployee />} />
             <Route path="/admin/employees/edit/:id" element={<EditEmployee />} />
             <Route path="/admin/attendance" element={<AttendanceHistory />} />
+            <Route path="/admin/leaves" element={<AdminLeaveApprovals />} />
           </Route>
 
           {/* Employee Protected Routes */}
           <Route element={<ProtectedRoute requiredRole="EMPLOYEE" />}>
             <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
             <Route path="/employee/attendance" element={<AttendanceHistory />} />
+            <Route path="/employee/leaves" element={<EmployeeLeavePage />} />
           </Route>
 
           {/* Catch-all fallback */}
