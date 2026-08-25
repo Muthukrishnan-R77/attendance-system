@@ -758,6 +758,8 @@ body {
 
   .table-header-bar > * {
     width: 100%;
+    flex: none !important;
+    min-width: 0 !important;
   }
 
   .custom-table th,
