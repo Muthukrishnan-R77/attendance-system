@@ -266,10 +266,12 @@ body {
 .table-responsive {
   width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .custom-table {
   width: 100%;
+  min-width: 620px;
   border-collapse: collapse;
   text-align: left;
 }
@@ -460,6 +462,10 @@ body {
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
+}
+
+.modal-footer .btn {
+  flex: 0 1 auto;
 }
 
 /* Alerts */
@@ -687,6 +693,7 @@ body {
     padding: 0 1rem;
     height: auto;
     min-height: 70px;
+    gap: 0.75rem;
   }
 
   .header-left {
@@ -727,6 +734,7 @@ body {
 
   .page-container {
     padding: 1rem;
+    min-width: 0;
   }
 
   .analytics-grid,
@@ -758,12 +766,74 @@ body {
     white-space: nowrap;
   }
 
+  .table-card {
+    min-width: 0;
+  }
+
+  .page-container .table-card form > div[style*="grid-template-columns"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .page-container .table-card[style*="maxWidth"] {
+    max-width: none !important;
+    padding: 1.25rem !important;
+  }
+
+  .page-container .table-card form > div[style*="justify-content: flex-end"] {
+    flex-direction: column-reverse;
+  }
+
+  .page-container .table-card form > div[style*="justify-content: flex-end"] .btn {
+    width: 100%;
+  }
+
+  .date-chip-box {
+    align-items: flex-start;
+  }
+
+  .date-chip-box span {
+    overflow-wrap: anywhere;
+  }
+
+  .chart-box {
+    height: 240px;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  .leave-form,
+  .leave-request-list {
+    padding: 1rem;
+  }
+
+  .calendar-card {
+    padding: 0.35rem;
+  }
+
+  .leave-calendar {
+    font-size: 0.8rem;
+  }
+
+  .leave-calendar .react-calendar__navigation button {
+    min-width: 32px;
+  }
+
   .login-card {
     padding: 1.5rem;
   }
 
   .modal-card {
     margin: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+  }
+
+  .modal-footer .btn {
+    width: 100%;
   }
 
   .btn {
@@ -787,6 +857,42 @@ body {
 
   .page-container {
     padding: 0.75rem;
+  }
+
+  .header {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .header-left {
+    gap: 0.5rem;
+  }
+
+  .mobile-menu-toggle,
+  .mobile-close-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .table-header-bar {
+    padding: 1rem;
+  }
+
+  .table-card[style*="padding: 2rem"] {
+    padding: 1rem !important;
+  }
+
+  .page-container h2 {
+    font-size: 1.3rem !important;
+  }
+
+  .page-container > div:first-child > p {
+    line-height: 1.45;
+  }
+
+  .alert {
+    align-items: flex-start;
+    padding: 0.85rem 1rem;
   }
 
   .table-card {
