@@ -653,7 +653,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .app-layout {
     display: block;
   }
@@ -760,6 +760,10 @@ body {
     width: 100%;
     flex: none !important;
     min-width: 0 !important;
+  }
+
+  .employee-filter-search {
+    height: auto !important;
   }
 
   .custom-table th,

@@ -92,7 +92,7 @@ const EmployeeManagement = () => {
           <div className="table-card">
             <div className="table-header-bar">
               {/* Search Bar */}
-              <div style={{ position: 'relative', flex: '1 1 260px' }}>
+              <div className="employee-filter-search" style={{ position: 'relative', flex: '1 1 260px' }}>
                 <input
                   type="text"
                   className="form-input"
