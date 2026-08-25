@@ -1,0 +1,74 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "password": "$2a$10$7UtR/Ptbv.up7ncRtIw3/Oi1g0KywfgSXKa9UdAHrDc0tfvW/ZUay",
+      "phone": "9876543210",
+      "department": "Management",
+      "position": "HR Manager",
+      "role": "ADMIN",
+      "created_at": "2026-08-25T09:31:26.372Z",
+      "updated_at": "2026-08-25T09:31:26.372Z"
+    },
+    {
+      "id": 2,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "$2a$10$IzC26GjI84BgaMs/at6sBebKB3FQ0EMj3JUGKVBeX49USVXQAQVVO",
+      "phone": "9876543211",
+      "department": "Engineering",
+      "position": "Software Developer",
+      "role": "EMPLOYEE",
+      "created_at": "2026-08-25T09:31:26.372Z",
+      "updated_at": "2026-08-25T09:31:26.372Z"
+    },
+    {
+      "id": 3,
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "password": "$2a$10$IzC26GjI84BgaMs/at6sBebKB3FQ0EMj3JUGKVBeX49USVXQAQVVO",
+      "phone": "9876543212",
+      "department": "Design",
+      "position": "UI/UX Designer",
+      "role": "EMPLOYEE",
+      "created_at": "2026-08-25T09:31:26.372Z",
+      "updated_at": "2026-08-25T09:31:26.372Z"
+    },
+    {
+      "id": 4,
+      "name": "Muthukrishnan R",
+      "email": "muthu@example.com",
+      "password": "$2a$10$ICLtx7xBpxU9Fe56/PpM5evI1lug3MRWO7p7e737If3noiO5LiR66",
+      "phone": "9025644746",
+      "department": "Engineering",
+      "position": "developer",
+      "role": "EMPLOYEE",
+      "created_at": "2026-08-25T09:32:53.940Z",
+      "updated_at": "2026-08-25T09:32:53.945Z"
+    }
+  ],
+  "attendance": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "attendance_date": "2026-08-25",
+      "check_in": "2026-08-25T09:31:26.374Z",
+      "check_out": null,
+      "status": "PRESENT",
+      "created_at": "2026-08-25T09:31:26.374Z"
+    },
+    {
+      "id": 2,
+      "user_id": 4,
+      "attendance_date": "2026-08-25",
+      "check_in": "2026-08-25T09:33:07.982Z",
+      "check_out": null,
+      "status": "PRESENT",
+      "created_at": "2026-08-25T09:33:07.983Z"
+    }
+  ],
+  "userIdCounter": 5,
+  "attendanceIdCounter": 3
+}
