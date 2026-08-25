@@ -6,6 +6,91 @@ Built with **React.js**, **Node.js/Express.js**, **PostgreSQL**, **JWT Authentic
 
 ---
 
+## 🔄 Work Flow Diagram
+
+```mermaid
+flowchart TD
+    U[USER] --> L[Login]
+    L --> A[Authentication]
+    A --> V1[Verify Email & Password]
+    A --> V2[Check User in Database]
+    A --> V3[Generate JWT Token]
+    V3 --> T[Return Token]
+
+    T --> R[Role Based Access]
+    R --> V4[Verify JWT Token]
+    R --> V5[Check User Role]
+
+    V5 --> ADM[ADMIN]
+    V5 --> EMP[EMPLOYEE]
+
+    ADM --> D1[Dashboard]
+    ADM --> D2[Manage Employees]
+    ADM --> D3[View Attendance]
+    ADM --> D4[Approve / Reject Leave]
+    ADM --> D5[Reports & Analytics]
+
+    EMP --> E1[Dashboard]
+    EMP --> E2[Check-In / Check-Out]
+    EMP --> E3[View Attendance]
+    EMP --> E4[Apply Leave]
+    EMP --> E5[View Leave Status]
+
+    D1 --> DB[(Database: PostgreSQL)]
+    D2 --> DB
+    D3 --> DB
+    D4 --> DB
+    D5 --> DB
+    E1 --> DB
+    E2 --> DB
+    E3 --> DB
+    E4 --> DB
+    E5 --> DB
+
+    ADM --> LO1[Logout]
+    EMP --> LO2[Logout]
+
+    subgraph EMP_MGMT[Employee Management]
+        M1[Add Employee]
+        M2[Edit Employee]
+        M3[Delete Employee]
+        M4[Search / Filter]
+        M5[View Employees]
+    end
+
+    subgraph ATT_MGMT[Attendance Management]
+        A1[Check-In]
+        A2[Check-Out]
+        A3[Prevent Duplicate Check-In]
+        A4[Attendance History]
+        A5[Calendar View]
+    end
+
+    subgraph LEAVE_MGMT[Leave Management]
+        L1[Apply Leave]
+        L2[Select Dates]
+        L3[Enter Reason]
+        L4[Submit]
+        L5[Approve]
+        L6[Reject]
+    end
+
+    subgraph DASH[Dashboard & Reports]
+        P1[Total Employees]
+        P2[Present / Absent]
+        P3[Today's Attendance]
+        P4[Pending Leaves]
+        P5[Monthly Reports]
+    end
+
+    ADM --> M1
+    EMP --> L1
+    DB --> A1
+    DB --> L5
+```
+
+---
+
 ## 🌟 Key Features
 
 ### 🔐 1. Authentication & Security
